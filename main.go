@@ -2,14 +2,15 @@ package main
 
 import (
 	"fmt"
-	"strconv"
+	"strings"
 )
-
 func main() {
-	hex := "1E"
-	hexdecimal, err := strconv.ParseInt(hex, 16, 64)
-	if err != nil {
-		fmt.Println("Error:", err)
+	text := "1E (hex) files were added"
+	word := strings.Fields(text)
+	for i, w := range word {
+// this i meeans index, w is word. i want to print them out in an index formatt
+		fmt.Println(i, w)
 	}
-	fmt.Println(hexdecimal)
+	   fmt.Println(word)
+
 }
