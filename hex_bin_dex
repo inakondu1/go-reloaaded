@@ -1,0 +1,54 @@
+package main
+
+import (
+	"fmt"
+	"strconv"
+	"strings"
+)
+
+func main() {
+	text := "EFF (hex)  1111110 (bin) 30 (dec) files were added"
+
+	word := strings.Fields(text)
+
+	for i, w := range word {
+		if w == "(dec)" || w == "(bin)" || w == "(hex)" {
+
+			// Detect number system
+			var base int
+			if w == "(hex)" {
+				base = 16
+			} else if w == "(bin)" {
+				base = 2
+			} else if w == "(dec)" {
+				base = 10
+			}
+
+			previousWord := word[i-1]
+
+			// Convert using the correct base
+			decimal, err := strconv.ParseInt(previousWord, base, 64)
+			if err != nil {
+				fmt.Println("Error:", err)
+				continue
+			}
+
+			// Replace previous word with decimal string
+			word[i-1] = strconv.FormatInt(decimal, 10)
+
+			// Remove the type indicator (hex/bin/dec)
+			word[i] = ""
+		}
+	}
+
+	// Rebuild sentence skipping empty words
+	var result []string
+	for _, w := range word {
+		if w != "" {
+			result = append(result, w)
+		}
+	}
+
+	finalSentence := strings.Join(result, " ")
+	fmt.Println(finalSentence)
+}

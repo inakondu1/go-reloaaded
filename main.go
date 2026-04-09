@@ -3,26 +3,23 @@ package main
 import (
 	"fmt"
 	"strconv"
-	"strings"
 )
 
 func main() {
-	text := "1E (hex) files were added"
-	// in here i need to split hte word so i will be using strings.Fields. then i will range through the word. the if statement is me planning on replacing hex in the future run
-	word := strings.Fields(text)
-	for i, w := range word {
-		if w == "(hex)" {
-			previousword := word[i-1]
-			// the lines of code below is where the conversion begine. this lines is expected to bring an out put of 30 after runing the code.
-			decimal, err := strconv.ParseInt(previousword, 16, 64)
-			if err != nil {
-				fmt.Println("Error:", err)
-			}
-			fmt.Println(decimal)
-		}
-		// this 'i' meeans index, w is word. i want to print them out in an index formatt
-		fmt.Println(i, w)
-	}
-	fmt.Println(word)
+	// Examples of numbers in different systems
+	hexNum := "1E"
+	binNum := "11110"
+	decNum := "30"
 
+	// Convert hex to decimal
+	hexDec, _ := strconv.ParseInt(hexNum, 16, 64)
+	fmt.Println("Hex", hexNum, "-> Decimal", hexDec)
+
+	// Convert binary to decimal
+	binDec, _ := strconv.ParseInt(binNum, 2, 64)
+	fmt.Println("Binary", binNum, "-> Decimal", binDec)
+
+	// Convert decimal string to integer
+	dec, _ := strconv.ParseInt(decNum, 10, 64)
+	fmt.Println("Decimal", decNum, "-> Decimal", dec)
 }
